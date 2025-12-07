@@ -9,20 +9,21 @@ import { FiChevronDown } from "react-icons/fi";
 export default function PremiumOrderPanel() {
   const [side, setSide] = useState<"buy" | "sell">("buy");
   const [amount, setAmount] = useState("");
-  const [currency, setCurrency] = useState<keyof typeof currencyIcon>("USD");
-  const [openDropdown, setOpenDropdown] = useState(false);
 
-  const tiltX = useMotionValue(0);
-  const tiltY = useTransform(tiltX, [-20, 20], [5, -5]);
-
+  // FIXED: currency is now typed safely
   const currencyIcon = {
     USD: <FaDollarSign className="text-gray-600 dark:text-gray-300" />,
     EUR: <FaEuroSign className="text-gray-600 dark:text-gray-300" />,
     BTC: <FaBitcoin className="text-amber-500" />,
   } as const;
-  
 
+  type CurrencyKey = keyof typeof currencyIcon;
 
+  const [currency, setCurrency] = useState<CurrencyKey>("USD");
+  const [openDropdown, setOpenDropdown] = useState(false);
+
+  const tiltX = useMotionValue(0);
+  const tiltY = useTransform(tiltX, [-20, 20], [5, -5]);
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6 bg-gradient-to-b from-white to-gray-50 dark:from-neutral-900 dark:to-neutral-800 relative overflow-hidden">
@@ -50,8 +51,6 @@ export default function PremiumOrderPanel() {
 
           {/* Header */}
           <div className="flex items-start gap-4 pb-3 border-b border-black/5 dark:border-white/5">
-            
-            {/* Image — NO BACKGROUND NOW */}
             <div className="flex-none">
               <Image
                 src="/btc.png"
@@ -119,7 +118,7 @@ export default function PremiumOrderPanel() {
 
               {openDropdown && (
                 <div className="absolute right-0 mt-2 w-28 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-lg shadow-lg overflow-hidden z-20">
-                  {["USD", "EUR", "BTC"].map((c) => (
+                  {(["USD", "EUR", "BTC"] as CurrencyKey[]).map((c) => (
                     <button
                       key={c}
                       onClick={() => {
@@ -137,7 +136,7 @@ export default function PremiumOrderPanel() {
             </div>
           </div>
 
-          {/* Yes/No — smaller */}
+          {/* Yes/No */}
           <div className="mt-4 grid grid-cols-2 gap-3">
             <motion.div
               whileHover={{ y: -3 }}
