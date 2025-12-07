@@ -9,7 +9,7 @@ import { FiChevronDown } from "react-icons/fi";
 export default function PremiumOrderPanel() {
   const [side, setSide] = useState<"buy" | "sell">("buy");
   const [amount, setAmount] = useState("");
-  const [currency, setCurrency] = useState("USD");
+  const [currency, setCurrency] = useState<keyof typeof currencyIcon>("USD");
   const [openDropdown, setOpenDropdown] = useState(false);
 
   const tiltX = useMotionValue(0);
@@ -19,7 +19,10 @@ export default function PremiumOrderPanel() {
     USD: <FaDollarSign className="text-gray-600 dark:text-gray-300" />,
     EUR: <FaEuroSign className="text-gray-600 dark:text-gray-300" />,
     BTC: <FaBitcoin className="text-amber-500" />,
-  };
+  } as const;
+  
+
+
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6 bg-gradient-to-b from-white to-gray-50 dark:from-neutral-900 dark:to-neutral-800 relative overflow-hidden">
