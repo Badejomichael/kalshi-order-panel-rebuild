@@ -14,6 +14,7 @@ export default function PremiumOrderPanel() {
   const currencyIcon = {
     USD: <FaDollarSign className="text-gray-600 dark:text-gray-300" />,
     EUR: <FaEuroSign className="text-gray-600 dark:text-gray-300" />,
+    BTC: <FaBitcoin className="text-amber-500" />,
   
   } as const;
 
