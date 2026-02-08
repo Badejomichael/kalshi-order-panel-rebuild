@@ -10,11 +10,11 @@ export default function PremiumOrderPanel() {
   const [side, setSide] = useState<"buy" | "sell">("buy");
   const [amount, setAmount] = useState("");
 
-  // FIXED: currency is now typed safely EUR: <FaEuroSign className="text-gray-600 dark:text-gray-300" />,
+  // FIXED: currency is now typed safely EUR: <FaEuroSign className="text-gray-600 dark:text-gray-300" />, BTC: <FaBitcoin className="text-amber-500" />,
   const currencyIcon = {
     USD: <FaDollarSign className="text-gray-600 dark:text-gray-300" />,
     
-    BTC: <FaBitcoin className="text-amber-500" />,
+    
   
   } as const;
 
